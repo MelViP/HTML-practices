@@ -1,0 +1,66 @@
+<!Doc type HTML>
+
+<meta charset="UTF-8">
+
+<h1>Juego de adivinación replicado</h1>
+
+<script>
+    
+    function saltoLinea() {
+        document.write("<br>");
+    }
+
+
+    function imprimir(frase) {
+
+        document.write(frase);
+
+    }
+
+    //generar numero random del 1 al 10
+    var numeroRandom = Math.round(Math.random()*10+1);
+
+    //tiene 3 vidas para adivinar el numero
+    var vidas = 3;
+
+
+// empezar a crear loop con contador en 1
+    var contador = 1;
+
+//mientas el contador de ingresos por el usuario sean menor o igual a 3, lo siguiente se debe ejecutar
+
+    while (contador <= vidas) {
+
+        //se le pide al user que ingrese un numero del 1 al 10
+
+        var intentos = parseInt(prompt("Ingrese un número del 1 al 10"));
+
+        //se ejecuta si el intento acertó
+        if (intentos == numeroRandom) {
+
+            alert("Adivinaste, eso nunca pasa en el intento " + contador);
+            break;
+        
+        } else {//si el intento falló entonces ejecutar lo siguiente
+
+            alert("Intentalo de nuevo, a ver si tienes suerte esta vez.  Intento número " + contador);
+
+        }
+
+        contador++;
+    }
+
+    if (intentos == numeroRandom) {
+
+            imprimir("Exacto.  El número en que yo pensé era " + numeroRandom);
+        
+        } else {//si el intento falló entonces ejecutar lo siguiente
+
+            imprimir("Mejor suerte la próxima.  El número en que yo pensé era " + numeroRandom);
+
+    }
+
+    saltoLinea();
+    imprimir("Fin");
+
+</script>
