@@ -1,0 +1,80 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");
+    pincel.fillStyle = "pink";
+    pincel.fillRect(0, 0, 600, 400);
+
+    var radio = 10;
+    function diseñarCircuferencia(x,y,radio,color) {
+        pincel.fillStyle = color;
+        pincel.beginPath();
+        pincel.arc(x,y,radio,0,2*Math.PI);
+        pincel.fill();
+    }
+
+    function limpiarPantalla(){
+        pincel.clearRect(0,0,600,400);
+        pincel.fillStyle = "pink";
+        pincel.fillRect(0, 0, 600, 400);
+    }
+
+
+    var x = 0;
+    function actualizarPantalla() {
+        
+        diseñarCircuferencia(x,20,10,"red");
+        x++;
+        
+    }
+
+    function sortearPosicionObjetivo(maximo) {
+        return Math.floor(Math.random()*maximo);
+    }
+
+    
+
+    function objetivo(x,y) {
+        diseñarCircuferencia(x,y,radio+20,"green");
+        diseñarCircuferencia(x,y,radio+10,"white");
+        diseñarCircuferencia(x,y,radio,"green");
+    }
+    
+    
+    
+    var xAleatorio = sortearPosicionObjetivo(600);
+    var yAleatorio = sortearPosicionObjetivo(400);
+
+  //  setInterval(actualizarPantalla,15);
+    
+    function actualizarObjetivo(){
+        pincel.fillStyle = "pink";
+        pincel.fillRect(0, 0, 600, 400);
+
+        xAleatorio = sortearPosicionObjetivo(600);
+        yAleatorio = sortearPosicionObjetivo(400);
+
+        objetivo(xAleatorio,yAleatorio);
+        x++;
+
+    }
+
+    function DispararDardo(evento){
+
+        var x = evento.pageX - pantalla.offsetLeft;
+        var y = evento.pageY - pantalla.offsetTop;
+
+        if ((x < xAleatorio + radio)&&
+            (x > xAleatorio - radio)&&
+            (y < yAleatorio + radio)&&
+            (y > yAleatorio - radio)) {
+            alert("Tiro al blanco");
+        }        
+    }
+    setInterval(actualizarObjetivo,800);
+
+    pantalla.onclick = DispararDardo;
+
+</script>
